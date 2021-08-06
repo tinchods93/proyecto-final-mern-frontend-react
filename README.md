@@ -1,4 +1,4 @@
-### Frontend from the MERN Final Project
+## Frontend from the MERN Final Project
 
 This is the frontend for the MERN Stack Final Project. This would be the `React` side and then i have to translate everything into `React Native`
 
