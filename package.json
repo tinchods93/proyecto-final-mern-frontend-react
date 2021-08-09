@@ -1,13 +1,20 @@
 {
-  "name": "birthday_reminder_project",
+  "name": "proyecto-final-mern-frontend-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
+    "dotenv": "^10.0.0",
+    "leaflet": "^1.7.1",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-dotenv": "^0.1.3",
+    "react-leaflet": "^3.2.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.1"
   },
@@ -33,6 +40,12 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "react-dotenv": {
+    "whitelist": [
+      "BASE_URL",
+      "GOOGLE_MAPS_KEY"
     ]
   }
 }
