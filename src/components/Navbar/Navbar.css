@@ -1,26 +1,9 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Fira Sans', sans-serif;
-  background: #f7fff7;
-  width: 100%;
-  min-height: 100vh;
-  min-width: 300px;
-  height: 100%;
-  line-height: 1.5;
-  font-size: 0.875rem;
-}
-
 .miNavbar {
   display: flex;
   justify-content: space-around;
   align-items: center;
   min-height: 8vh;
-  background-color: #ff6b6b;
+  background-color: var(--v2-color4);
 }
 
 .miNavbar__logo {
@@ -30,12 +13,13 @@ body {
   align-items: center;
   letter-spacing: 5px;
   font-size: 1.15em;
+  text-decoration: none;
 }
 
 .miNavbar__logo i {
   font-size: 2em;
   transform: scaleX(-1);
-  color: #1a535c;
+  color: var(--v2-color5);
 }
 
 .miNavbar__links {
@@ -50,7 +34,7 @@ body {
 }
 
 .miNavbar__links a {
-  color: #f7f9fd;
+  color: var(--v2-color3);
   text-decoration: none;
   font-weight: 500;
   letter-spacing: 1.6px;
@@ -67,7 +51,7 @@ body {
 .burger div {
   width: 25px;
   height: 3px;
-  background-color: #f7f9fd;
+  background-color: var(--v2-color3);
   margin: 5px;
 }
 
@@ -87,7 +71,7 @@ body {
     height: 92vh;
     width: 200px;
     top: 8vh;
-    background-color: #ff6b6b;
+    background-color: var(--v2-color4);
     display: flex;
     flex-direction: column;
     transform: translateX(100%);
