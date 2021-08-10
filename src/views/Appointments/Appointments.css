@@ -70,7 +70,6 @@
 
 .body__container {
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 100%;
@@ -87,9 +86,13 @@
   color: var(--v2-color1-hover);
 }
 
-.map {
+.map__container {
   width: 80%;
-  height: 60%;
+  height: 55%;
+  border: solid 2px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
 }
 .map__header {
   display: flex;
@@ -98,42 +101,31 @@
   text-align: center;
   height: 10%;
 }
-.map__body {
-  width: 100%;
-  height: 90%;
-  /* background: deepskyblue; */
-}
-.map_component {
-  height: 100%;
-  width: 100%;
-}
+
 .appointmentInfo {
   height: fit-content;
+  margin-top: 20px;
   width: 80%;
-}
-
-.appointmentInfo__header {
-  /* background: cornflowerblue; */
   display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 15%;
-}
-.appointmentInfo__body {
+  flex-direction: column;
   padding: 10px;
-  width: 100%;
-  height: fit-content;
   background: white;
   border: solid 1px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
-.appointmentInfo__body label {
+.appointmentInfo label {
   font-weight: 600;
 }
+
+.customLink {
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
 .InfoBody_header {
+  text-shadow: 0 0 3px rgb(114, 114, 255);
   font-size: 1.2em;
   font-weight: 600;
   margin-bottom: 10px;
