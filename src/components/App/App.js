@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from '../../views/Home';
-import Places from '../../views/Places';
+import Places from '../../views/Places/Places';
 import Appointments from '../../views/Appointments/Appointments';
 import Autor from '../../views/Autor';
 import Admin from '../../views/Admin';
