@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MyButton from '../../components/MyButton/MyButton';
 import './Admin.css';
+import Alert from '../../components/Alert/Alert';
 import {
   getPlacesById,
   updatePlace,
@@ -15,6 +16,10 @@ export default class Admin extends Component {
       selectedView: 'DefaultView',
       data: undefined,
       search: true,
+      showAlert: {
+        alertComponent: undefined,
+        show: false,
+      },
     };
   }
 
@@ -42,12 +47,26 @@ export default class Admin extends Component {
 
     if (data && data._id) {
       await getPlacesById(data._id)
-        .then((place) =>
-          this.setState({
-            data: place,
-            search: false,
-          })
-        )
+        .then((place) => {
+          console.log('PLACE=>', place);
+          if (place.message && place.message === 'FAILED') {
+            this.setState({
+              showAlert: {
+                show: true,
+                alertComponent: (
+                  <Alert severity='ERROR'>
+                    ID invalido o no se encuentra un lugar con el mismo!
+                  </Alert>
+                ),
+              },
+            });
+          } else {
+            this.setState({
+              data: place,
+              search: false,
+            });
+          }
+        })
         .catch((e) => console.log('ERROR GET PLACE EN ADMIN', e));
     }
   };
@@ -190,7 +209,32 @@ export default class Admin extends Component {
           <this.FormStandard
             onSubmitF={async (ev) => {
               ev.preventDefault();
-              await updatePlace(data).then((a) => console.log(a));
+              await updatePlace(data)
+                .then((a) =>
+                  this.setState({
+                    showAlert: {
+                      show: true,
+                      alertComponent: (
+                        <Alert severity='SUCCESS'>
+                          El lugar ha sido actualizado con exito!
+                        </Alert>
+                      ),
+                    },
+                  })
+                )
+                .catch((e) =>
+                  this.setState({
+                    showAlert: {
+                      show: true,
+                      alertComponent: (
+                        <Alert severity='ERROR'>
+                          El lugar no se actualizó. Revisa que los datos sean
+                          validos!
+                        </Alert>
+                      ),
+                    },
+                  })
+                );
             }}
           />
         ) : (
@@ -211,7 +255,31 @@ export default class Admin extends Component {
           onSubmitF={async (ev) => {
             ev.preventDefault();
             const { data } = this.state;
-            if (data && data._id) await deletePlacesById(data._id);
+            if (data && data._id) {
+              await deletePlacesById(data._id);
+              this.setState({
+                showAlert: {
+                  show: true,
+                  alertComponent: (
+                    <Alert severity='SUCCESS'>
+                      ¡El lugar fue eliminado con exito!
+                    </Alert>
+                  ),
+                },
+              });
+            } else {
+              this.setState({
+                showAlert: {
+                  show: true,
+                  alertComponent: (
+                    <Alert severity='ERROR'>
+                      ¡El ID es invalido o no encontramos un lugar que
+                      corresponda a ese ID!
+                    </Alert>
+                  ),
+                },
+              });
+            }
           }}
         />
       </div>
@@ -261,6 +329,12 @@ export default class Admin extends Component {
   };
 
   render() {
-    return <div className='centered__container'>{this.getView()}</div>;
+    const { showAlert } = this.state;
+    return (
+      <div className='centered__container'>
+        {showAlert.show ? showAlert.alertComponent : ''}
+        {this.getView()}
+      </div>
+    );
   }
 }
