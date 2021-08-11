@@ -1,6 +1,6 @@
 import axios from 'axios';
 import env from 'react-dotenv';
-const url = 'http://192.168.1.18:3000';
+const url = 'https://proyecto-final-mern-backend.herokuapp.com';
 
 export const newAppointment = async (appointmentData) => {
   const appointment = await axios

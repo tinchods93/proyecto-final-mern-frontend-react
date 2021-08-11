@@ -6,6 +6,7 @@ import {
 } from '../../components/helpers/services/appointments';
 import moment from 'moment';
 import MapView from '../../components/Map/MapView';
+import MyButton from '../../components/MyButton/MyButton';
 
 export default class Appointments extends Component {
   constructor(props) {
@@ -27,14 +28,6 @@ export default class Appointments extends Component {
       showData: false,
       showToast: false,
     });
-
-  MyButton = ({ innerText, menu }) => {
-    return (
-      <div onClick={() => this.selectFormView(menu)} className='MyButton'>
-        {innerText}
-      </div>
-    );
-  };
 
   setInput = (ev) => {
     const attribute = ev.target.name;
@@ -95,7 +88,7 @@ export default class Appointments extends Component {
             </div>
             <MapView place={appointmentData.place_id} />
           </div>
-          <div className='appointmentInfo'>
+          <div className='basic__card appointmentInfo'>
             <this.InfoBody />
           </div>
         </div>
@@ -118,7 +111,7 @@ export default class Appointments extends Component {
       const { date, place_id, state_process, user_id } = appointmentData;
       return (
         <>
-          <div className='InfoBody__group InfoBody_header'>
+          <div className='basic__card__header InfoBody_header'>
             <span>Datos del solicitante</span>
           </div>
           <div className='InfoBody__group'>
@@ -179,19 +172,21 @@ export default class Appointments extends Component {
 
   DefaultView = () => {
     return (
-      <div className='appointmentMenu'>
-        <div className='appointmentMenu__header'>
-          <h2>¿Qué desea hacer?</h2>
-        </div>
-        <div className='appointmentMenu__buttonContainer'>
-          <this.MyButton
-            innerText={'Sacar Turno'}
-            menu={'NewAppointmentView'}
-          />
-          <this.MyButton
-            innerText={'Buscar Turno'}
-            menu={'SearchAppointmentView'}
-          />
+      <div className='centered__container'>
+        <div className='basic__card'>
+          <div className='basic__card__header --center'>
+            <span>¿Qué desea hacer?</span>
+          </div>
+          <div className='appointmentMenu__buttonContainer'>
+            <MyButton
+              innerText={'Sacar Turno'}
+              onClickF={() => this.selectFormView('NewAppointmentView')}
+            />
+            <MyButton
+              innerText={'Buscar Turno'}
+              onClickF={() => this.selectFormView('SearchAppointmentView')}
+            />
+          </div>
         </div>
       </div>
     );
@@ -201,7 +196,7 @@ export default class Appointments extends Component {
     return (
       <div className='appointmentsData__container'>
         <div className='form__container'>
-          <form className='formCard'>
+          <form className='basic__card'>
             <div className='form__group'>
               <div className='form__label__group'>
                 <label htmlFor='dni'>DNI: </label>
@@ -233,7 +228,7 @@ export default class Appointments extends Component {
     return (
       <div className='appointmentsData__container'>
         <div className='form__container'>
-          <form className='formCard'>
+          <form className='basic__card'>
             <div className='form__group'>
               <div className='form__label__group'>
                 <label htmlFor='name'>Nombre: </label>

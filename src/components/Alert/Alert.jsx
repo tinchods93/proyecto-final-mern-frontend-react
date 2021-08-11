@@ -5,8 +5,8 @@ export default class Alert extends Component {
     super(props);
     this.state = {
       message: this.props.children || this.props.message,
-      header: this.props.header || '',
       severity: this.props.severity.toUpperCase(),
+      header: this.props.header || `${this.props.severity.toUpperCase()}!`,
       alertClass: {
         ERROR: 'error',
         SUCCESS: 'success',
@@ -16,20 +16,22 @@ export default class Alert extends Component {
   }
 
   render() {
-    const { severity, header, message, alertClass } = this.state;
+    const { severity, header, message, alertClass, active } = this.state;
 
-    return (
+    return active ? (
       <div
         className={`miAlert miAlert--${alertClass[severity]}`}
-        onClick={this.props.onClick}>
+        onClick={() => this.setState({ active: false })}>
         <div className='alert__header'>
           <span>{header}</span>
-          <i class='far fa-times-circle' />
+          <i className='far fa-times-circle' />
         </div>
         <div className='alert__body'>
           <span>{message}</span>
         </div>
       </div>
+    ) : (
+      ''
     );
   }
 }
