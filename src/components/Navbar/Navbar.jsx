@@ -31,13 +31,7 @@ const NavBar = () => {
           <a href='/'>Inicio</a>
         </li>
         <li>
-          <a href='/places'>¿Donde vacunarme?</a>
-        </li>
-        <li>
           <a href='/appointments'>Turnos</a>
-        </li>
-        <li>
-          <a href='/autor'>Autor</a>
         </li>
         <li>
           <a href='/admin'>Admin</a>

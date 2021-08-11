@@ -1,0 +1,17 @@
+.MyButton {
+  background: var(--v2-color5);
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  border-radius: 5px;
+  border: solid 2px rgba(0, 0, 0, 0.2);
+}
+
+.MyButton:hover {
+  background: var(--v2-color5-hover);
+  cursor: pointer;
+}

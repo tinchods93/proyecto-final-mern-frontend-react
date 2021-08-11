@@ -44,6 +44,10 @@ export default class Places extends Component {
         <div className='place__body'>
           <div className='place__details'>
             <div className='details__group'>
+              <label htmlFor='id'>ID: </label>
+              <span>{placeSelected._id}</span>
+            </div>
+            <div className='details__group'>
               <label htmlFor='name'>Nombre: </label>
               <span>{placeSelected.name}</span>
             </div>
@@ -75,15 +79,42 @@ export default class Places extends Component {
       return <this.PlaceDetails />;
     } else {
       return (
-        <div className='grid__container'>
-          {placesData ? (
-            placesData.map((place, index) => (
-              <this.PlaceComponent place={place} key={index} />
-            ))
-          ) : (
-            <></>
-          )}
-        </div>
+        <>
+          <div className='home__header'>
+            <div className='home__header__background'>
+              <img
+                src='https://pbs.twimg.com/media/Eu3SL65XUAsBsns.jpg'
+                alt=''
+              />
+            </div>
+            <div className='home__header__text'>
+              <div className='icon__container'>
+                <i className='fas fa-virus'></i>
+                <i className='fas fa-syringe'></i>
+              </div>
+              <span>Vacunaciones COVID - 19</span>
+              <p>
+                La vacunación se llevará a cabo en etapas de acuerdo a los
+                grupos establecidos y se realizará en forma gratuita, equitativa
+                y voluntaria.
+              </p>
+            </div>
+          </div>
+          <div className='home__body'>
+            <div className='home__body__header'>
+              <span>¿Donde Vacunarme?</span>
+            </div>
+            <div className='grid__container'>
+              {placesData ? (
+                placesData.map((place, index) => (
+                  <this.PlaceComponent place={place} key={index} />
+                ))
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
+        </>
       );
     }
   }
