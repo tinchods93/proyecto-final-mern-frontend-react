@@ -5,7 +5,8 @@ import {
   newAppointment,
 } from '../../components/helpers/services/appointments';
 import moment from 'moment';
-import GoogleMaps from 'simple-react-google-maps';
+import MapView from '../../components/Map/MapView';
+import MyButton from '../../components/MyButton/MyButton';
 
 export default class Appointments extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export default class Appointments extends Component {
       selectedView: 'DefaultView',
       data: undefined,
       showData: false,
+      showToast: false,
     };
   }
 
@@ -23,15 +25,9 @@ export default class Appointments extends Component {
       selectedView: menu,
       data: undefined,
       appointmentData: undefined,
+      showData: false,
+      showToast: false,
     });
-
-  MyButton = ({ innerText, menu }) => {
-    return (
-      <div onClick={() => this.selectFormView(menu)} className='MyButton'>
-        {innerText}
-      </div>
-    );
-  };
 
   setInput = (ev) => {
     const attribute = ev.target.name;
@@ -50,7 +46,11 @@ export default class Appointments extends Component {
       const { data } = this.state;
 
       await getAppointmentByDni(data.dni).then((appo) =>
-        this.setState({ appointmentData: appo, showData: true })
+        this.setState({
+          appointmentData: appo,
+          showData: true,
+          showToast: true,
+        })
       );
     } catch (error) {
       console.log('error', error);
@@ -64,7 +64,11 @@ export default class Appointments extends Component {
 
       if (data) {
         await newAppointment(data).then((appo) =>
-          this.setState({ appointmentData: appo, showData: true })
+          this.setState({
+            appointmentData: appo,
+            showData: true,
+            showToast: true,
+          })
         );
       }
     } catch (error) {
@@ -74,23 +78,30 @@ export default class Appointments extends Component {
 
   DataAppointment = () => {
     const { appointmentData } = this.state;
-    return (
-      <div className='body__container'>
-        <div className='map'>
-          <div className='map__header'>
-            <h3>MAP HEADER</h3>
+
+    if (appointmentData) {
+      return (
+        <div className='body__container'>
+          <div className='map__container'>
+            <div className='map__header'>
+              <h3>Lugar de vacunación</h3>
+            </div>
+            <MapView place={appointmentData.place_id} />
           </div>
-        </div>
-        <div className='appointmentInfo'>
-          <div className='appointmentInfo__header'>
-            <h3>INFO HEADER</h3>
-          </div>
-          <div className='appointmentInfo__body'>
+          <div className='basic__card appointmentInfo'>
             <this.InfoBody />
           </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className='body__container'>
+          <h3>
+            Ese DNI no existe en nuestra base de datos, revise si es correcto
+          </h3>
+        </div>
+      );
+    }
   };
 
   InfoBody = () => {
@@ -99,8 +110,8 @@ export default class Appointments extends Component {
     try {
       const { date, place_id, state_process, user_id } = appointmentData;
       return (
-        <div className='InfoBody'>
-          <div className='InfoBody__group InfoBody_header'>
+        <>
+          <div className='basic__card__header InfoBody_header'>
             <span>Datos del solicitante</span>
           </div>
           <div className='InfoBody__group'>
@@ -125,7 +136,7 @@ export default class Appointments extends Component {
             <span>Información sobre el lugar y fecha de vacunación</span>
           </div>
           <div className='InfoBody__group'>
-            <label htmlFor='date'>Fecha: </label>
+            <label htmlFor='date'>Fecha del turno de vacunación: </label>
             <span name='date'>
               {moment(date.split('T')[0]).format('DD-MM-YYYY')}
             </span>
@@ -135,10 +146,19 @@ export default class Appointments extends Component {
             <span name='place_name'>{place_id.name}</span>
           </div>
           <div className='InfoBody__group'>
+            <label htmlFor='url'>Foto de la entrada del lugar: </label>
+            <span
+              name='url'
+              onClick={() => this.handleLinkClick(place_id.url)}
+              className='customLink'>
+              Hacé click acá
+            </span>
+          </div>
+          <div className='InfoBody__group'>
             <label htmlFor='place_address'>Dirección: </label>
             <span name='place_address'>{place_id.address}</span>
           </div>
-        </div>
+        </>
       );
     } catch (error) {
       console.log('ERROR', error);
@@ -146,21 +166,27 @@ export default class Appointments extends Component {
     }
   };
 
+  handleLinkClick = (url) => {
+    window.open(url);
+  };
+
   DefaultView = () => {
     return (
-      <div className='appointmentMenu'>
-        <div className='appointmentMenu__header'>
-          <h2>¿Qué desea hacer?</h2>
-        </div>
-        <div className='appointmentMenu__buttonContainer'>
-          <this.MyButton
-            innerText={'Sacar Turno'}
-            menu={'NewAppointmentView'}
-          />
-          <this.MyButton
-            innerText={'Buscar Turno'}
-            menu={'SearchAppointmentView'}
-          />
+      <div className='centered__container'>
+        <div className='basic__card'>
+          <div className='basic__card__header --center'>
+            <span>¿Qué desea hacer?</span>
+          </div>
+          <div className='appointmentMenu__buttonContainer'>
+            <MyButton
+              innerText={'Sacar Turno'}
+              onClickF={() => this.selectFormView('NewAppointmentView')}
+            />
+            <MyButton
+              innerText={'Buscar Turno'}
+              onClickF={() => this.selectFormView('SearchAppointmentView')}
+            />
+          </div>
         </div>
       </div>
     );
@@ -170,7 +196,7 @@ export default class Appointments extends Component {
     return (
       <div className='appointmentsData__container'>
         <div className='form__container'>
-          <form className='formCard'>
+          <form className='basic__card'>
             <div className='form__group'>
               <div className='form__label__group'>
                 <label htmlFor='dni'>DNI: </label>
@@ -202,7 +228,7 @@ export default class Appointments extends Component {
     return (
       <div className='appointmentsData__container'>
         <div className='form__container'>
-          <form className='formCard'>
+          <form className='basic__card'>
             <div className='form__group'>
               <div className='form__label__group'>
                 <label htmlFor='name'>Nombre: </label>

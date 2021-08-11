@@ -1,0 +1,41 @@
+:root {
+  --error-color: #d1a2a2;
+  --success-color: #74ad7c;
+}
+.miAlert {
+  background: #fff;
+  position: absolute;
+  right: 20%;
+  left: 25%;
+  width: 400px;
+  height: auto;
+  border-radius: 15px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  display: block;
+}
+.miAlert--error {
+  background: var(--error-color);
+}
+.miAlert--success {
+  background: var(--success-color);
+}
+
+.alert__header {
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+.alert__header span {
+  width: 90%;
+  font-weight: 600;
+  font-size: 1.3em;
+}
+.alert__header i {
+  width: 10%;
+  cursor: pointer;
+  font-size: 1.3em;
+  align-self: center;
+  text-align: center;
+}
