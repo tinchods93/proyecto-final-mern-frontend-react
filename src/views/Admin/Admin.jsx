@@ -21,6 +21,7 @@ export default class Admin extends Component {
         show: false,
       },
     };
+    this.closeAlert = this.closeAlert.bind(this);
   }
 
   ReturnIcon = () => {
@@ -54,7 +55,7 @@ export default class Admin extends Component {
               showAlert: {
                 show: true,
                 alertComponent: (
-                  <Alert severity='ERROR'>
+                  <Alert closeFunction={this.closeAlert} severity='ERROR'>
                     ID invalido o no se encuentra un lugar con el mismo!
                   </Alert>
                 ),
@@ -71,6 +72,15 @@ export default class Admin extends Component {
     }
   };
 
+  closeAlert = () => {
+    this.setState({
+      showAlert: {
+        alertComponent: undefined,
+        show: false,
+      },
+    });
+  };
+
   NewPlaceView = () => {
     return (
       <div className='basic__card'>
@@ -82,7 +92,20 @@ export default class Admin extends Component {
           onSubmitF={async (ev) => {
             ev.preventDefault();
             const { data } = this.state;
-            if (data) await newPlace(data);
+            if (data) {
+              await newPlace(data).then((a) => {
+                this.setState({
+                  showAlert: {
+                    show: true,
+                    alertComponent: (
+                      <Alert closeFunction={this.closeAlert} severity='SUCCESS'>
+                        El lugar fue cargado exitosamente
+                      </Alert>
+                    ),
+                  },
+                });
+              });
+            }
           }}
         />
       </div>
@@ -215,7 +238,9 @@ export default class Admin extends Component {
                     showAlert: {
                       show: true,
                       alertComponent: (
-                        <Alert severity='SUCCESS'>
+                        <Alert
+                          closeFunction={this.closeAlert}
+                          severity='SUCCESS'>
                           El lugar ha sido actualizado con exito!
                         </Alert>
                       ),
@@ -227,7 +252,7 @@ export default class Admin extends Component {
                     showAlert: {
                       show: true,
                       alertComponent: (
-                        <Alert severity='ERROR'>
+                        <Alert closeFunction={this.closeAlert} severity='ERROR'>
                           El lugar no se actualizó. Revisa que los datos sean
                           validos!
                         </Alert>
@@ -256,23 +281,40 @@ export default class Admin extends Component {
             ev.preventDefault();
             const { data } = this.state;
             if (data && data._id) {
-              await deletePlacesById(data._id);
-              this.setState({
-                showAlert: {
-                  show: true,
-                  alertComponent: (
-                    <Alert severity='SUCCESS'>
-                      ¡El lugar fue eliminado con exito!
-                    </Alert>
-                  ),
-                },
+              await deletePlacesById(data._id).then((a) => {
+                if (a === 'FAILED') {
+                  this.setState({
+                    showAlert: {
+                      show: true,
+                      alertComponent: (
+                        <Alert closeFunction={this.closeAlert} severity='ERROR'>
+                          El lugar no fue eliminado, compruebe el que el ID sea
+                          valido
+                        </Alert>
+                      ),
+                    },
+                  });
+                } else {
+                  this.setState({
+                    showAlert: {
+                      show: true,
+                      alertComponent: (
+                        <Alert
+                          closeFunction={this.closeAlert}
+                          severity='SUCCESS'>
+                          ¡El lugar fue eliminado con exito!
+                        </Alert>
+                      ),
+                    },
+                  });
+                }
               });
             } else {
               this.setState({
                 showAlert: {
                   show: true,
                   alertComponent: (
-                    <Alert severity='ERROR'>
+                    <Alert closeFunction={this.closeAlert} severity='ERROR'>
                       ¡El ID es invalido o no encontramos un lugar que
                       corresponda a ese ID!
                     </Alert>

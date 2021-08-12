@@ -159,4 +159,15 @@
   .place {
     flex-direction: column;
   }
+  .home__header {
+    font-size: 13px;
+    min-width: 388px;
+  }
+  .icon__container {
+    font-size: 15vw;
+  }
+  .home__header__background img {
+    object-fit: fill;
+    min-width: 380px;
+  }
 }

@@ -21,7 +21,10 @@ export default class Alert extends Component {
     return active ? (
       <div
         className={`miAlert miAlert--${alertClass[severity]}`}
-        onClick={() => this.setState({ active: false })}>
+        onClick={() => {
+          this.setState({ active: false });
+          this.props.closeFunction();
+        }}>
         <div className='alert__header'>
           <span>{header}</span>
           <i className='far fa-times-circle' />

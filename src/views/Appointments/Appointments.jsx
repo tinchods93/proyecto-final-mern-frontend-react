@@ -194,106 +194,116 @@ export default class Appointments extends Component {
 
   SearchAppointmentView = () => {
     return (
-      <div className='appointmentsData__container'>
-        <div className='form__container'>
-          <form className='basic__card'>
-            <div className='form__group'>
-              <div className='form__label__group'>
-                <label htmlFor='dni'>DNI: </label>
-              </div>
-              <input
-                onChange={this.setInput}
-                type='text'
-                name='dni'
-                placeholder='Ingrese su DNI'
-              />
-            </div>
-            <button
-              className='MyButton'
-              style={{ fontWeight: 600 }}
-              onClick={this.getAppointmentData}>
-              Enviar
-            </button>
-          </form>
+      <>
+        <div className='appointment__header'>
+          <i
+            className='fas fa-times-circle closeIcon'
+            onClick={() => this.selectFormView('DefaultView')}
+          />
         </div>
-        <>{this.state.showData ? <this.DataAppointment /> : <></>}</>
-        <i
-          className='fas fa-times-circle closeIcon'
-          onClick={() => this.selectFormView('DefaultView')}></i>
-      </div>
+        <div className='appointment__body'>
+          <div className='form__container'>
+            <form className='basic__card'>
+              <div className='form__group'>
+                <div className='form__label__group'>
+                  <label htmlFor='dni'>DNI: </label>
+                </div>
+                <input
+                  onChange={this.setInput}
+                  type='text'
+                  name='dni'
+                  placeholder='Ingrese su DNI'
+                />
+              </div>
+              <button
+                className='MyButton'
+                style={{ fontWeight: 600 }}
+                onClick={this.getAppointmentData}>
+                Enviar
+              </button>
+            </form>
+          </div>
+          <>{this.state.showData ? <this.DataAppointment /> : <></>}</>
+        </div>
+      </>
     );
   };
 
   NewAppointmentView = () => {
     return (
-      <div className='appointmentsData__container'>
-        <div className='form__container'>
-          <form className='basic__card'>
-            <div className='form__group'>
-              <div className='form__label__group'>
-                <label htmlFor='name'>Nombre: </label>
-              </div>
-              <input
-                onChange={this.setInput}
-                type='text'
-                name='name'
-                placeholder='Ingrese su nombre'
-              />
-            </div>
-            <div className='form__group'>
-              <div className='form__label__group'>
-                <label htmlFor='last_name'>Apellido: </label>
-              </div>
-              <input
-                onChange={this.setInput}
-                type='text'
-                name='last_name'
-                placeholder='Ingrese su apellido'
-              />
-            </div>
-            <div className='form__group'>
-              <div className='form__label__group'>
-                <label htmlFor='born_date'>Fecha de Nacimiento: </label>
-              </div>
-              <input onChange={this.setInput} type='date' name='born_date' />
-            </div>
-            <div className='form__group'>
-              <div className='form__label__group'>
-                <label htmlFor='dni'>DNI: </label>
-              </div>
-              <input
-                onChange={this.setInput}
-                type='text'
-                name='dni'
-                placeholder='Ingrese su dni'
-              />
-            </div>
-            <div className='form__group'>
-              <div className='form__label__group'>
-                <label htmlFor='address'>Dirección: </label>
-              </div>
-              <input
-                onChange={this.setInput}
-                type='text'
-                name='address'
-                placeholder='Ingrese su dirección'
-              />
-            </div>
-            <button
-              className='MyButton'
-              style={{ fontWeight: 600 }}
-              onClick={this.postAppointmentData}>
-              Enviar
-            </button>
-          </form>
+      <>
+        <div className='appointment__header'>
+          <i
+            className='fas fa-times-circle closeIcon'
+            onClick={() => this.selectFormView('DefaultView')}
+          />
         </div>
-        <>
-          <>{this.state.showData ? <this.DataAppointment /> : <></>}</>
-        </>
-        <i
-          className='fas fa-times-circle closeIcon'
-          onClick={() => this.selectFormView('DefaultView')}></i>
-      </div>
+        <div className='appointment__body'>
+          <div className='form__container'>
+            <form className='basic__card'>
+              <div className='form__group'>
+                <div className='form__label__group'>
+                  <label htmlFor='name'>Nombre: </label>
+                </div>
+                <input
+                  onChange={this.setInput}
+                  type='text'
+                  name='name'
+                  placeholder='Ingrese su nombre'
+                />
+              </div>
+              <div className='form__group'>
+                <div className='form__label__group'>
+                  <label htmlFor='last_name'>Apellido: </label>
+                </div>
+                <input
+                  onChange={this.setInput}
+                  type='text'
+                  name='last_name'
+                  placeholder='Ingrese su apellido'
+                />
+              </div>
+              <div className='form__group'>
+                <div className='form__label__group'>
+                  <label htmlFor='born_date'>Fecha de Nacimiento: </label>
+                </div>
+                <input onChange={this.setInput} type='date' name='born_date' />
+              </div>
+              <div className='form__group'>
+                <div className='form__label__group'>
+                  <label htmlFor='dni'>DNI: </label>
+                </div>
+                <input
+                  onChange={this.setInput}
+                  type='text'
+                  name='dni'
+                  placeholder='Ingrese su dni'
+                />
+              </div>
+              <div className='form__group'>
+                <div className='form__label__group'>
+                  <label htmlFor='address'>Dirección: </label>
+                </div>
+                <input
+                  onChange={this.setInput}
+                  type='text'
+                  name='address'
+                  placeholder='Ingrese su dirección'
+                />
+              </div>
+              <button
+                className='MyButton'
+                style={{ fontWeight: 600 }}
+                onClick={this.postAppointmentData}>
+                Enviar
+              </button>
+            </form>
+          </div>
+          <>
+            <>{this.state.showData ? <this.DataAppointment /> : <></>}</>
+          </>
+        </div>
+      </>
     );
   };
 

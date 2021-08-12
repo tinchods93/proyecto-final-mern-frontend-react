@@ -40,11 +40,13 @@ export const updatePlace = async (data) => {
 
 export const deletePlacesById = async (id) => {
   try {
+    let response = '';
     await axios
       .delete(`${url}/vaccination/places/${id}`)
-      .catch((e) => console.log(e));
+      .then((a) => (response = 'SUCCESS'))
+      .catch((e) => (response = 'FAILED'));
 
-    return 'SUCCESS';
+    return response;
   } catch (error) {
     return { message: 'FAILED', error };
   }

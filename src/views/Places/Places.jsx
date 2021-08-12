@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Places.css';
 import { getPlaces } from '../../components/helpers/services/vaccinationPlaces';
 import MapView from '../../components/Map/MapView';
+import LoadingIcon from '../../components/LoadingIcon/LoadingIcon';
 export default class Places extends Component {
   constructor(props) {
     super(props);
@@ -104,15 +105,15 @@ export default class Places extends Component {
             <div className='home__body__header'>
               <span>¿Donde Vacunarme?</span>
             </div>
-            <div className='grid__container'>
-              {placesData ? (
-                placesData.map((place, index) => (
+            {placesData && placesData.length ? (
+              <section className='grid__container'>
+                {placesData.map((place, index) => (
                   <this.PlaceComponent place={place} key={index} />
-                ))
-              ) : (
-                <></>
-              )}
-            </div>
+                ))}
+              </section>
+            ) : (
+              <LoadingIcon />
+            )}
           </div>
         </>
       );

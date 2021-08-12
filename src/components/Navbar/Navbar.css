@@ -1,5 +1,8 @@
 .miNavbar {
   display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 1;
   justify-content: space-around;
   align-items: center;
   min-height: 8vh;
@@ -67,6 +70,7 @@
   }
   .miNavbar__links {
     position: absolute;
+    z-index: 1;
     right: 0px;
     height: 92vh;
     width: 200px;

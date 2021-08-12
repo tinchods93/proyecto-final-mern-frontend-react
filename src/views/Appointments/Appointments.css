@@ -16,16 +16,31 @@
   min-width: 200px;
 }
 
-.appointmentsData__container {
+.appointments__container {
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 80vh;
 }
 
+.appointment__header {
+  width: 100%;
+  height: fit-content;
+  margin-bottom: 10px;
+  text-align: end;
+  padding: 5px;
+}
+
+.appointment__body {
+  display: flex;
+  min-width: fit-content;
+  height: 100%;
+}
+
 .form__container {
   font-size: 1rem;
-  margin: 10px;
   max-width: 300px;
+  min-width: 280px;
 }
 .form__group {
   display: flex;
@@ -44,14 +59,17 @@
 
 .body__container {
   display: flex;
+  margin-left: 10px;
   align-items: center;
   flex-direction: column;
   width: 100%;
+  min-width: 280px;
 }
 
 .map__container {
-  width: 80%;
+  width: 70vw;
   height: 55%;
+  min-height: 300px;
   border: solid 2px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   border-radius: 5px;
@@ -89,7 +107,22 @@
 }
 
 @media screen and (max-width: 768px) {
-  .appointmentsData__container {
+  .appointment__body {
     flex-direction: column;
+  }
+  .form__container {
+    margin-bottom: 10px;
+    max-width: 100%;
+  }
+  .appointment__header {
+    max-width: 380px;
+  }
+  .body__container {
+    margin-left: auto;
+  }
+
+  .appointmentInfo,
+  .map__container {
+    width: 100%;
   }
 }
