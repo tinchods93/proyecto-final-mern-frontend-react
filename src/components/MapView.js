@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import './Map.css';
+import '../assets/Map.css';
 const MapView = ({ place }) => {
   const position = [place.latitude, place.longitude];
 

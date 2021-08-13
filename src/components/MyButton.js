@@ -1,4 +1,4 @@
-import './MyButton.css';
+import '../assets/MyButton.css';
 
 const MyButton = ({ innerText, onClickF }) => {
   return (

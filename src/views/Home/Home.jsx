@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import './Places.css';
-import { getPlaces } from '../../components/helpers/services/vaccinationPlaces';
-import MapView from '../../components/Map/MapView';
-import LoadingIcon from '../../components/LoadingIcon/LoadingIcon';
-export default class Places extends Component {
+import '../../assets/Home.css';
+import { getPlaces } from '../../components/common/services/vaccinationPlaces';
+import PlaceDetails from '../../components/PlaceDetails';
+import LoadingIcon from '../../components/LoadingIcon';
+
+export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,51 +34,10 @@ export default class Places extends Component {
     );
   };
 
-  PlaceDetails = () => {
-    const { placeSelected } = this.state;
-    return (
-      <div className='place'>
-        <div className='place__header'>
-          <i
-            className='fas fa-times-circle closeIcon'
-            onClick={() => this.selectFormView('DefaultView')}></i>
-        </div>
-        <div className='place__body'>
-          <div className='place__details'>
-            <div className='details__group'>
-              <label htmlFor='id'>ID: </label>
-              <span>{placeSelected._id}</span>
-            </div>
-            <div className='details__group'>
-              <label htmlFor='name'>Nombre: </label>
-              <span>{placeSelected.name}</span>
-            </div>
-            <div className='details__group'>
-              <label htmlFor='address'>Dirección: </label>
-              <span>{placeSelected.address}</span>
-            </div>
-            <div className='details__group'>
-              <img
-                src={placeSelected.url}
-                alt='Imagen del lugar'
-                onClick={() => {
-                  window.open(placeSelected.url);
-                }}
-              />
-            </div>
-          </div>
-          <div className='place__map'>
-            <MapView place={placeSelected} />
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   render() {
     const { placesData, placeSelected } = this.state;
     if (placeSelected) {
-      return <this.PlaceDetails />;
+      return <PlaceDetails placeSelected={placeSelected} />;
     } else {
       return (
         <>

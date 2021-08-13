@@ -1,4 +1,4 @@
-import './LoadingIcon.css';
+import '../assets/LoadingIcon.css';
 export default function LoadingIcon() {
   return (
     <div className='lds-roller'>
