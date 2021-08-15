@@ -1,82 +1,84 @@
 import React, { Component } from 'react';
 import '../../assets/Home.css';
-import { getPlaces } from '../../components/common/services/vaccinationPlaces';
 import PlaceDetails from '../../components/PlaceDetails';
+import PlaceList from '../../components/PlaceList';
 import LoadingIcon from '../../components/LoadingIcon';
+import { connect } from 'react-redux';
 
-export default class Home extends Component {
+import {
+  placesSelector,
+  selectedSelector,
+} from '../../app/redux/selectors/vPlacesSelector';
+import {
+  refreshPlacesAction,
+  selectPlaceAction,
+} from '../../app/redux/actions/vPlacesAction';
+
+const mapStateToProps = (state) => ({
+  places: placesSelector(state),
+  selected: selectedSelector(state),
+});
+const mapActionsToProps = (dispatch) => ({
+  refreshPlace: () => dispatch(refreshPlacesAction()),
+  selectPlace: (placeSelected) => dispatch(selectPlaceAction(placeSelected)),
+});
+
+export class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      placesData: undefined,
-      placeSelected: undefined,
-    };
   }
   componentDidMount = () => {
-    getPlaces().then((resp) => {
-      if (resp) this.setState({ placesData: resp });
-    });
+    try {
+      if (!this.props.places.length) {
+        this.props.refreshPlace();
+      }
+    } catch (error) {
+      console.log('ERROR trying to use props function in HOME', error);
+    }
   };
 
   selectFormView = () =>
     this.setState({
-      placeSelected: undefined,
+      placeSelected: null,
     });
 
-  PlaceComponent = ({ place }) => {
-    return (
-      <div
-        className='miCard'
-        onClick={() => this.setState({ placeSelected: place })}>
-        <img src={place.url} alt='Imagen de portada' />
-        <span>{place.name}</span>
-      </div>
-    );
-  };
-
   render() {
-    const { placesData, placeSelected } = this.state;
-    if (placeSelected) {
-      return <PlaceDetails placeSelected={placeSelected} />;
-    } else {
-      return (
-        <>
-          <div className='home__header'>
-            <div className='home__header__background'>
-              <img
-                src='https://pbs.twimg.com/media/Eu3SL65XUAsBsns.jpg'
-                alt=''
-              />
-            </div>
-            <div className='home__header__text'>
-              <div className='icon__container'>
-                <i className='fas fa-virus'></i>
-                <i className='fas fa-syringe'></i>
-              </div>
-              <span>Vacunaciones COVID - 19</span>
-              <p>
-                La vacunación se llevará a cabo en etapas de acuerdo a los
-                grupos establecidos y se realizará en forma gratuita, equitativa
-                y voluntaria.
-              </p>
-            </div>
+    const { places, selected, selectPlace } = this.props;
+
+    return selected ? (
+      <PlaceDetails placeSelected={selected} />
+    ) : (
+      <>
+        <div className='home__header'>
+          <div className='home__header__background'>
+            <img src='https://pbs.twimg.com/media/Eu3SL65XUAsBsns.jpg' alt='' />
           </div>
-          <div className='home__body'>
-            <div className='home__body__header'>
-              <span>¿Donde Vacunarme?</span>
+          <div className='home__header__text'>
+            <div className='icon__container'>
+              <i className='fas fa-virus'></i>
+              <i className='fas fa-syringe'></i>
             </div>
-            {placesData && placesData.length ? (
-              <section className='grid__container'>
-                {placesData.map((place, index) => (
-                  <this.PlaceComponent place={place} key={index} />
-                ))}
-              </section>
-            ) : (
-              <LoadingIcon />
-            )}
+            <span>Vacunaciones COVID - 19</span>
+            <p>
+              La vacunación se llevará a cabo en etapas de acuerdo a los grupos
+              establecidos y se realizará en forma gratuita, equitativa y
+              voluntaria.
+            </p>
           </div>
-        </>
-      );
-    }
+        </div>
+        <div className='home__body'>
+          <div className='home__body__header'>
+            <span>¿Donde Vacunarme?</span>
+          </div>
+          {places && places.length ? (
+            <PlaceList placeList={places} onClickFunction={selectPlace} />
+          ) : (
+            <LoadingIcon />
+          )}
+        </div>
+      </>
+    );
   }
 }
+
+export default connect(mapStateToProps, mapActionsToProps)(Home);
