@@ -10,7 +10,8 @@
   --v2-color4: #ff6b6b;
   --v2-color5: #ffe66d;
   --v2-color5-hover: #fff3b5;
-  --v1-color1-hover: #b097b4;
+  --v1-color1-hover: #bd9bc4;
+  --v2-color4-hover: #db3737;
   --v2-color1-hover: #257582;
   --v2-color2-hover: #95ece6;
 }
@@ -115,4 +116,22 @@ body {
   .body__buttonsBar {
     width: 100%;
   }
+}
+
+.editIcon {
+  font-size: 1.5em;
+  color: var(--v1-color1);
+}
+.deleteIcon {
+  font-size: 1.5em;
+  color: var(--v2-color4);
+}
+
+.editIcon:hover {
+  color: var(--v1-color1-hover);
+  cursor: pointer;
+}
+.deleteIcon:hover {
+  color: var(--v2-color4-hover);
+  cursor: pointer;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../assets/Home.css';
-import PlaceDetails from '../../components/PlaceDetails';
-import PlaceList from '../../components/PlaceList';
+import PlaceDetails from '../../components/Places/PlaceDetails';
+import PlaceList from '../../components/Places/PlaceList';
 import LoadingIcon from '../../components/LoadingIcon';
 import { connect } from 'react-redux';
 
@@ -24,9 +24,6 @@ const mapActionsToProps = (dispatch) => ({
 });
 
 export class Home extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount = () => {
     try {
       if (!this.props.places.length) {
