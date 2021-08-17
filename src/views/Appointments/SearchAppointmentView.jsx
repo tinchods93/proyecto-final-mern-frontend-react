@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getAppointmentByDni } from '../../components/common/services/appointments';
+import { getAppointmentByDni } from '../../app/services/appointments';
 import DataAppointment from '../../components/DataAppointment';
 
 const SearchAppointmentView = () => {

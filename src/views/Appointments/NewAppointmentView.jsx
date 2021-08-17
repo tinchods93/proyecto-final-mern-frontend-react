@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { newAppointment } from '../../components/common/services/appointments';
+import { newAppointment } from '../../app/services/appointments';
 import DataAppointment from '../../components/DataAppointment';
 
 const NewAppointmentView = () => {

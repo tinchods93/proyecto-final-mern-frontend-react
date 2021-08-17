@@ -1,11 +1,13 @@
 import React from 'react';
 import '../assets/App.css';
+import '../assets/MyButton.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Home from '../views/Home/Home';
 import Appointments from '../views/Appointments/Appointments';
 import NewAppointmentView from '../views/Appointments/NewAppointmentView';
 import SearchAppointmentView from '../views/Appointments/SearchAppointmentView';
+import AdminView from '../views/Admin/AdminView';
 import NavBar from './Navbar';
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
               path='/appointments/search'
               exact
               component={SearchAppointmentView}></Route>
+            <Route path='/admin' exact component={AdminView}></Route>
+
           </Switch>
         </Router>
       </div>
