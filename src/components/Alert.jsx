@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Alert.css';
+import '../assets/Alert.css';
 export default class Alert extends Component {
   constructor(props) {
     super(props);

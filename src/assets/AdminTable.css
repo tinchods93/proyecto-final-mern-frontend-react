@@ -1,0 +1,82 @@
+#titulo_tabla {
+  font-size: 2em;
+  font-weight: 800;
+  text-shadow: 0 0 3px rgb(80, 80, 248);
+}
+table {
+  margin-top: 10px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #999;
+}
+
+table tbody td {
+  padding: 5px;
+}
+
+table thead tr {
+  background-color: #008c8c;
+  color: #fff;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: #eee;
+}
+
+table tbody tr:hover {
+  background-color: #ccc;
+}
+
+table tbody tr td:first-child {
+  color: #f40;
+}
+
+#actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 10px;
+  font-size: 1.2em;
+}
+#actions i {
+  margin: 5px;
+}
+
+.admin__header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.admin__header i {
+  color: var(--v2-color1);
+  font-size: 2em;
+}
+
+.admin__header i:hover {
+  cursor: pointer;
+  color: var(--v2-color1-hover);
+}
+
+.modal__header {
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.modal__close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import useWindowDimensions from '../helpers/hooks/WindowsDimensions';
-import './Navbar.css';
+import useWindowDimensions from '../app/hooks/WindowsDimensions';
+import '../assets/Navbar.css';
 const NavBar = () => {
   const { width } = useWindowDimensions();
   const [leftBarActive, setLeftBarActive] = useState(false);
@@ -34,7 +34,7 @@ const NavBar = () => {
           <a href='/appointments'>Turnos</a>
         </li>
         <li>
-          <a href='/admin'>Admin</a>
+          <a href='/admin'>Administración</a>
         </li>
       </ul>
       {width <= 768 ? <BurgerButton /> : <></>}
