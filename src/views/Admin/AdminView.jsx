@@ -28,16 +28,22 @@ export class AdminView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      places:undefined,
       modalIsOpen: false,
     };
   }
 
   componentDidMount() {
     this.props.refreshPlace();
+    if((this.state.places === undefined || this.state.places !== this.props.places) && this.props.places){
+      this.setState({places:this.props.places})
+    }
   }
 
   componentDidUpdate() {
-    this.props.refreshPlace();
+    if((this.state.places === undefined || this.state.places !== this.props.places) && this.props.places){
+      this.setState({places:this.props.places})
+    }
   }
 
   flipModal = () => {
@@ -46,10 +52,9 @@ export class AdminView extends Component {
   };
 
   render() {
-    const { places } = this.props;
-    const { modalIsOpen } = this.state;
+    const { modalIsOpen, places} = this.state;
 
-    return places.length ? (
+    return  places && places.length ? (
       <>
         <span id='titulo_tabla'>Tabla de Administración</span>
         <ModalComponent

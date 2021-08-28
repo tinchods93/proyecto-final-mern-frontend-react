@@ -72,6 +72,7 @@ export const deletePlaceAction = (id) => {
     try {
       const deletedPlace = await deletePlacesById(id);
       dispatch(deletePlaceOk(deletedPlace));
+      dispatch(refreshPlacesAction());
     } catch (e) {
       console.log(e);
       const { message } = e;
@@ -86,6 +87,7 @@ export const postPlaceAction = (data) => {
     try {
       const createdPlace = await newPlace(data);
       dispatch(postPlaceOk(createdPlace));
+      dispatch(refreshPlacesAction());
     } catch (e) {
       console.log(e);
       const { message } = e;
@@ -101,6 +103,7 @@ export const patchPlaceAction = (data) => {
       const updatedPlace = await updatePlace(data);
       console.log('EN UPDATE PLACE');
       dispatch(patchPlaceOk(updatedPlace));
+      dispatch(refreshPlacesAction());
     } catch (e) {
       console.log(e);
       const { message } = e;
